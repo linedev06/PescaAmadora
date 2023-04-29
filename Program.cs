@@ -18,7 +18,7 @@ Console.WriteLine();
 if (localpesca !="C" && localpesca !="M")
 {
 Console.ForegroundColor = ConsoleColor.Red;
-Console.Write("local não identificado");
+Console.WriteLine("local não identificado");
 Console.ResetColor();
 return;
 }
@@ -26,12 +26,17 @@ if (localpesca == "C" && PesoPescado <= Limitecontinente ||
 localpesca == "M" && PesoPescado <= LimiteMarinha)
 {
 Console.ForegroundColor = ConsoleColor.DarkGreen;
-Console.Write("Pescaria dentro dos limites legais");
+Console.WriteLine("Pescaria dentro dos limites legais");
 Console.ResetColor();
 return;
 }
 
+double pesoPermitido = localpesca == "C" ? Limitecontinente : LimiteMarinha;
+double excessoPeso = PesoPescado - pesoPermitido;
 
+decimal multa = Multabase + MultaExcessoPeso * Convert.ToDecimal(MultaExcessoPeso);
 
-
-
+Console.ForegroundColor = ConsoleColor.Red;
+Console.WriteLine($"Pescaria excede os limites legais em {excessoPeso}kg.");
+Console.WriteLine($"Sujeito a multa de {multa:C}");
+Console.ResetColor();
